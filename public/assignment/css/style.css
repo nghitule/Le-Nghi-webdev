@@ -1,10 +1,16 @@
 input.form-control {
     margin-bottom: 5px;
 }
+.content {
+
+    margin-left: 50px;
+}
 
 body {
     padding-top: 65px;
 }
+.navy-color { color: navy;  }
+.lightseagreen-color {color: lightseagreen; }
 
 .navbar-default {
     background-color: #3d96bd;
@@ -16,4 +22,11 @@ body {
 .glyphicon {
     color: white;
     margin-right: 15px;
+    margin-left: 15px;
+    margin-bottom: 15px;
+}
+
+.list {
+    color: deepskyblue;
+    margin-left: 50px;
 }
