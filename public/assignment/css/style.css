@@ -2,7 +2,6 @@ input.form-control {
     margin-bottom: 5px;
 }
 .content {
-
     margin-left: 50px;
 }
 
@@ -18,14 +17,12 @@ body {
 .navbar-default .navbar-brand {
     Color: white;
 }
-
-.glyphicon {
+.navbar .glyphicon {
     color: white;
     margin-right: 15px;
     margin-left: 15px;
     margin-bottom: 15px;
 }
-
 .list {
     color: deepskyblue;
     margin-left: 50px;
