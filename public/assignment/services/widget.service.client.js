@@ -36,9 +36,7 @@
         return api;
 
         function createWidget(widget) {
-            var newWidget = [];
-            newWidget = widgets.push(widget);
-            return newWidget;
+            widgets.push(widget);
         }
 
         function findWidgetsByPageId(pageId) {
@@ -60,8 +58,8 @@
 
         function updateWidget(widget) {
             for(var wg in widgets) {
-                if(widgets[wg]._id === widgets._id){
-                    widgets[wg]= widget;
+                if(widgets[wg]._id === widget){
+                    widgets.splice(p,1);
                 }
             }
         }
