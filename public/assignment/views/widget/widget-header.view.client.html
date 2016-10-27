@@ -1,22 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Widget Heading</title>
-</head>
-
-<body>
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-text pull-left" >
-            <a href="widget-list.html">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
                 <span class="glyphicon glyphicon-chevron-left"></span>
             </a>
         </div>
         <div class="navbar-text pull-right">
-            <a href="widget-list.html">
+            <a ng-click="model.createNewWidget(model.widgets)">
                 <span class="glyphicon glyphicon-ok"></span>
             </a>
         </div>
@@ -32,18 +22,18 @@
         <form>
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" placeholder="GIZMODO">
+                <input ng-model ="model.widgets.text" type="text" class="form-control" id="name" placeholder="GIZMODO">
             </div>
             <div class="form-group">
                 <label for="description">Text</label>
-                <input type="text" class="form-control" id="description"
+                <input ng-model="model.widgets.description" type="text" class="form-control" id="description"
                        placeholder="US Senate Reaches Compromise on Emergency Zika Funding">
             </div>
             <div class="form-group">
                 <label for="size">Size</label>
-                <input type="number" class="form-control" id="size" placeholder="3">
+                <input ng-model="model.widgets.size" type="number" class="form-control" id="size" placeholder="3">
             </div>
-            <a href="widget-list.html" class="btn btn-danger btn-block">Delete</a>
+            <a ng-click="model.deleteWidget(model.widgets._id)" class="btn btn-danger btn-block">Delete</a>
         </form>
 </div>
 
@@ -51,14 +41,9 @@
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="navbar-text pull-right"  >
-            <a href="profile.html" class="pull-right">
+            <a href="../views/user/profile.view.client.html" class="pull-right">
                 <span class="glyphicon glyphicon-user"></span>
             </a>
         </div>
     </div>
 </nav>
-
-
-
-</body>
-</html>

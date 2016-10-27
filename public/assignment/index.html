@@ -1,23 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="WebAppMaker">
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+
+    <script src="views/user/login.controller.client.js"></script>
+    <script src="views/user/profile.controller.client.js"></script>
+    <script src="views/user/register.controller.client.js"></script>
+    <script src="views/website/website-list.controller.client.js"></script>
+    <script src="views/website/website-new.controller.client.js"></script>
+    <script src="views/website/website-edit.controller.client.js"></script>
+    <script src="views/page/page-list.controller.client.js"></script>
+    <script src="views/page/page-new.controller.client.js"></script>
+    <script src="views/page/page-edit.controller.client.js"></script>
+    <script src="views/widget/widget-list.controller.client.js"></script>
+    <script src="views/widget/widget-new.controller.client.js"></script>
+    <script src="views/widget/widget-edit.controller.client.js"></script>
+
+
+    <script src="services/user.service.client.js"></script>
+    <script src="services/website.service.client.js"></script>
+    <script src="services/page.service.client.js"></script>
+    <script src="services/widget.service.client.js"></script>
+
+    <link href="../css/bootstrap.css" rel="stylesheet"/>
     <link href="css/style.css" rel="stylesheet"/>
     <meta charset="UTF-8">
     <title>Assignment Home Page</title>
 </head>
-<body class="content">
-    <div>
-    <h1 class="navy-color">Assignment Home Page</h1>
-    <h3 class="lightseagreen-color">Assignment 2</h3>
-    <p> Submitting Login.html and Register.html</p>
-    <ul>
-        <li>
-            <a href="login.html">Login</a>
-        </li>
-        <li>
-            <a href="register.html">Register</a>
-        </li>
-     </ul>
+
+<body>
+    <div ng-view>
     </div>
 </body>
+
 </html>
