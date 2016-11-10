@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
             <div class="navbar-brand">Profile</div>
-            <a href="#/user/{{model.user._id}}" class="navbar-text pull-right">
+            <a ng-click="model.updateUser()" class="navbar-text pull-right">
                 <span class="glyphicon glyphicon-ok"></span>
             </a>
 
@@ -38,6 +38,8 @@
 
         <a href="#/user/{{model.user._id}}/website" class="btn btn-primary btn-block">Websites</a>
         <a href="#/login" class="btn btn-danger btn-block">Logout</a>
+        <a class="btn btn-warning btn-block"
+            ng-click="model.unregisterUser()">Unregister</a>
 </div>
 
 

@@ -3,37 +3,66 @@
         .module("WebAppMaker")
         .controller("WebsiteEditController", WebsiteEditController);
 
-    function WebsiteEditController($routeParams, WebsiteService, $location) {
+    function WebsiteEditController($routeParams, WebsiteService, $location, UserService) {
         var vm = this;
-        vm.userId = parseInt($routeParams['uid']);
-        vm.websiteId = parseInt($routeParams['wid']);
+        vm.userId = parseInt($routeParams.uid);
+        vm.websiteId = parseInt($routeParams.wid);
+
         vm.updateWebsite = updateWebsite;
         vm.deleteWebsite = deleteWebsite;
         vm.deleteUser = deleteUser;
 
         function init() {
-            vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
+            var promise = WebsiteService.findAllWebsitesForUser(vm.userId);
+            promise
+                .success(function(websites) {
+                    vm.websites = websites;
+
+                });
         }
         init();
 
         function init1() {
-            vm.currentWebsite = WebsiteService.findWebsiteById(vm.websiteId);
+            WebsiteService
+                .findWebsiteById(vm.websiteId)
+                .success(function(website){
+                    if(website != '0') {
+                        vm.website = website;
+                    }
+                })
+                .error(function(){
+                });
         }
         init1();
 
         function updateWebsite(website) {
-            WebsiteService.updateWebsite(website);
-            $location.url("/user/"+vm.userId+"/website");
+            WebsiteService
+                .updateWebsite(vm.website)
+                .success (function() {
+                    $location.url("/user/"+vm.userId+"/website");
+                });
+
         }
 
         function deleteWebsite(website) {
-            WebsiteService.deleteWebsite(website);
-            $location.url("/user/"+vm.userId+"/website");
+            WebsiteService
+                .deleteWebsite(vm.website)
+                .success(function(){
+                $location.url("/user/"+vm.userId+"/website");
+            })
+                .error(function() {
+                });
+
         }
 
         function deleteUser(userId) {
-            WebsiteService.deleteUser(userId);
-            $location.url("/home");
+            UserService
+                .unregisterUser(vm.user._id)
+                .success(function(){
+                    $location.url("/login");
+                })
+                .error(function(){
+                });
         }
     }
 })();

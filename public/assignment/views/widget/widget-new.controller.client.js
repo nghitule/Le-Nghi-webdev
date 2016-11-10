@@ -13,29 +13,33 @@
         vm.selectWidget = selectWidget;
 
         function init() {
-            vm.widgets = WidgetService.findWidgetsByPageId(vm.pageId);
+            var promise = WidgetService.findAllWidgetsForPage(vm.pageId);
+            promise
+                .success(function (widgets) {
+                    vm.widgets = widgets;
+                })
+                .error(function () {
+                });
         }
 
         init();
 
-        function createNewWidget(widget) {
-            widget._id = (new Date()).getTime();
-            widget.pageId = vm.pageId;
-            WidgetService.createWidget(widget);
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/");
-        }
-
-
         function selectWidget(widgetType) {
-            var newWidget=[];
-            newWidget._id = (new Date()).getTime();
-            newWidget.widgetType = widgetType;
-            WidgetService.createWidget(newWidget);
-            console.log(newWidget);
-            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/"+newWidget._id);
-            //vm.newWidget._id = (new Date()).getTime();
-            //vm.newWidget.widgetType = widgetType;
-
+            //console.log(vm.pageId);
+            PageService
+                .findPageById(vm.pageId)
+                .then(function (response) {
+                        vm.page = response.data;
+                        vm.widget.pageId = vm.pageId;
+                        vm.widget.widgetType = widgetType;
+                        console.log(vm.widget);
+                        //return WidgetService.createWidget(vm.page._id,vm.widget)
+                    }
+                )
+                .then (function(response) {
+                    var newWidget = response.data;
+                    console.log(newWidget);
+                })
         }
     }
 })();

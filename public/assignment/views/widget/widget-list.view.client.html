@@ -1,3 +1,8 @@
+
+<link href="../../../css/jquery-ui.css" rel="stylesheet"/>
+<script src="../../../js/jquery.js"></script>
+<script src="../../../js/jquery-ui.js"></script>
+
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="row container-fluid">
             <div class="navbar-text pull-left" style="margin-left: 10px;">
@@ -18,7 +23,7 @@
         </div>
 </nav>
 
-<div class="container-fluid" style="padding-bottom:50px;">
+<div class="container-fluid jga-sortable" style="padding-bottom:50px;">
     <div ng-switch="widget.widgetType"
          ng-repeat="widget in model.widgets">
 
@@ -58,7 +63,7 @@
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="row navbar-text pull-right">
-            <a href="#/user/{{model.userId}}">
+            <a href="#/user/{{model.uid}}">
                 <span class="glyphicon glyphicon-user"></span>
             </a>
         </div>
@@ -66,7 +71,7 @@
                 <a href="#">
                     <span class="glyphicon glyphicon-play"></span>
                 </a>
-                <a href="/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}">
+                <a href="/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}">
                     <span class="glyphicon glyphicon-eye-open" style="margin-left:10px;"></span>
                 </a>
         </div>

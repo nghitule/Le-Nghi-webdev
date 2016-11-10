@@ -20,7 +20,7 @@
 
         <div class="col-sm-8">
             <div class="navbar-text pull-right" style="margin-right: 0px;">
-                <a ng-click="model.updateWebsite(model.currentWebsite)">
+                <a ng-click="model.updateWebsite(model.website)">
                     <span class="glyphicon glyphicon-ok"></span>
                 </a>
             </div>
@@ -50,9 +50,8 @@
     <div class="right-scroll col-xs-12 col-sm-8 pull-right">
         <form>
             <div class="form-group">
-                {{Website.name}}
                 <label for="name">Website Name</label>
-                <input ng-model="model.currentWebsite.name"
+                <input ng-model="model.website.name"
                        type="text"
                        class="form-control"
                        id="name"
@@ -60,11 +59,12 @@
             </div>
             <div class="form-group">
                 <label for="description">Website Description</label>
-                <textarea ng-model="model.currentWebsite.description"
+                <textarea ng-model="model.website.description"
                           class="form-control"
                           id="description"
                           placeholder="Description"></textarea>
-                <a ng-click="model.deleteWebsite(model.currentWebsite._id)" class="btn btn-danger btn-block" style="margin-top:15px;">Delete</a>
+                <a class="btn btn-danger btn-block" style="margin-top:15px;"
+                   ng-click="model.deleteWebsite(model.website)">Delete</a>
             </div>
         </form>
     </div>

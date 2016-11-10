@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-fixed-top">
+<!--<nav class="navbar navbar-default navbar-fixed-top">
     <div class="row container-fluid">
             <div class="navbar-text pull-left" style="margin-left: 10px;">
                 <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
@@ -6,7 +6,7 @@
                 </a>
             </div>
         <div class="navbar-text pull-right" style="margin-right:10px;">
-            <a ng-click="model.createNewWidget(model.widgets)">
+            <<a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
                 <span class="glyphicon glyphicon-ok"></span>
             </a>
         </div>
@@ -16,18 +16,17 @@
                 </a>
             </div>
         </div>
-</nav>
+</nav>-->
 
-<div class="container-fluid">
-    <div class="form-class">
-        <div ng-include src="'views/widget/widget-'+ model.widgets.widgetType.toLowerCase()+'.view.client.html'"></div>
-    </div>
+<div class="row container-fluid">
+        <div ng-include="'views/widget/widget-' + model.widget.widgetType+ '.view.client.html'"></div>
 </div>
 
+<!--
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="row navbar-text pull-right">
-            <a href="#/user/{{model.userId}}">
+            <a href="#/user/{{model.uid}}">
                 <span class="glyphicon glyphicon-user"></span>
             </a>
         </div>
@@ -35,9 +34,10 @@
                 <a href="#">
                     <span class="glyphicon glyphicon-play"></span>
                 </a>
-                <a href="/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}">
+                <a href="/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}">
                     <span class="glyphicon glyphicon-eye-open" style="margin-left:10px;"></span>
                 </a>
         </div>
     </div>
 </nav>
+-->

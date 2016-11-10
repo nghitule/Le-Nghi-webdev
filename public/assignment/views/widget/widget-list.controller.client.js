@@ -13,8 +13,21 @@
 
         vm.checkSafeHtml = checkSafeHtml;
         vm.checkSafeYouTubeUrl = checkSafeYouTubeUrl;
+
         function init() {
-            vm.widgets = WidgetService.findWidgetsByPageId(vm.pid);
+            var promise = WidgetService.findAllWidgetsForPage(vm.pid)
+            promise
+                .success(function(widgets) {
+                    vm.widgets=widgets;
+                })
+                .error(function() {
+                });
+
+            // var widgets = $(".wam-widgets") //local variable
+            //     .sortable ({
+            //         axis: 'y'
+            // });
+            //console.log(widgets);
         }
         init();
 

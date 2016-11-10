@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Open Bets</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1" >
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel='stylesheet' href='http://dmsi4yymnggal.cloudfront.net/skins/default/css/skeleton.css?v=v0.10.0_20161018C' media='all' />
+<link rel='stylesheet' href='http://dmsi4yymnggal.cloudfront.net/skins/default/css/colors/red.css?v=v0.10.0_20161018C' media='all' />
+<link rel='stylesheet' href='http://dmsi4yymnggal.cloudfront.net/skins/topset9/main.css?v=v0.10.0_20161018C' media='all' />
+<link rel='stylesheet' href='http://dmsi4yymnggal.cloudfront.net/skins/default/css/custom-asian.css?v=v0.10.0_20161018C' media='all' />
+<link rel='stylesheet' href='http://dmsi4yymnggal.cloudfront.net/js/libs/mnp/jquery.mnumpad.css?v=v0.10.0_20161018C' media='all' />
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script type="text/javascript" src="http://d62704yqrcz20.cloudfront.net/combined/libs.js?v=v0.10.0_20161018C"></script>
+<script type="text/javascript" src="http://d62704yqrcz20.cloudfront.net/combined/scripts.js?v=v0.10.0_20161018C"></script>
+<script type="text/javascript">
+	var ctx = "";
+	var BROWSER_CATEGORY = 'PERSONAL_COMPUTER';
+	var MOBILE_INTERFACE = BROWSER_CATEGORY == "SMARTPHONE" || BROWSER_CATEGORY == "TABLET";
+	var SMARTPHONE = BROWSER_CATEGORY == "SMARTPHONE";
+	var sportsbook, sportsbookExt, lineService, leagueService, betService, lineUtils, templateService, searchService, timerService;
+	//
+	var playerService = new PlayerService(
+			'0',
+			'E',
+			'W',
+			'C',
+			'',
+			'false',
+			'false',
+			1000.0000,
+			'',
+			'U',
+			[],
+			false);
+			
+	var wagerUtils = new WagerUtils();
+
+	var sportsbookAsian, lineServiceAsian, leagueServiceAsian, betServiceAsian, asianUtils;
+
+	$(function() {
+		new Init();
+	});
+</script>
+
+<script type="text/javascript">
+	var Labels = {
+		max : 'MAX'
+	};
+
+	var Messages = {
+		maxPinned : 'You haved reached the maximum allowed pinned leagues'
+	};
+</script>
+
+
+	<meta name="decorator" content="default" />
+	
+</head>
+<body class="home">
+	<!--  header  -->
+	<div class="header">
+		<div class="mobile-menu-responsive">
+			<span class="glyphicon glyphicon-th-large mobile"></span>
+		</div>
+		<div class="wrapper clear">
+			<a class="logo left" href="/"> <i>TopSet9</i></a>
+			<ul class="menu menu-balance right">
+				<li id="link-open-bets"><a href="/player/open-bets">Open Bets</a></li>
+				<li id="link-history"><a href="/player/history">History</a></li>
+				<li class="has-sub" id="show-balance"><a href="javascript:void(0);" class="avail-balance"></a>
+					<ul class="menu-sub">
+						<li><span>Available Balance</span>&nbsp;<span class="avail-balance"></span></li>
+						<li><span>Current Balance</span>&nbsp;<span class="cur-balance"></span></li>
+						<li><span>Freeplay Balance</span>&nbsp;<span class="fp-balance"></span></li>
+						<li><span>Amount At Risk</span>&nbsp;<span class="at-risk"></span></li>
+					</ul>
+				</li>
+				<li><a class="noti" href="/player/messages">
+					<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+						</a></li>
+				<li class="has-sub"><a href="javascript:void(0);"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+					<ul class="menu-sub">
+						<li><a href="/player/preferences">Preferences</a></li>
+						<li><a href="/login?logout">Logout&nbsp;8TB806</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+
+		<div class="menu-header">
+			<div class="wrapper">
+				<ul class="menu menu-main">
+					<li class="has-sub">
+						<a id="active-wt" class="module-enabled" href="/sports">Sports</a>
+						<ul id="bettype" class="menu menu-sub">
+							<li><label>STRAIGHT BET<input type="checkbox" value="0"/></label></li>
+								<li><label>BET IT ALL<input type="checkbox" value="11"/></label></li>
+								<li><label>PARLAY<input type="checkbox" value="1"/></label></li>
+								<li><label>TEASER<input type="checkbox" value="2"/></label></li>
+								<li><label>IF WIN ONLY<input type="checkbox" value="3"/></label></li>
+								<li><label>IF WIN OR TIE<input type="checkbox" value="7"/></label></li>
+								<li><label>ROUND ROBIN<input type="checkbox" value="5"/></label></li>
+								<li><label>WIN REVERSE<input type="checkbox" value="4"/></label></li>
+								<li><label>ACTION REVERSE<input type="checkbox" value="8"/></label></li>
+								</ul>
+					</li>
+					<!-- <li id="link-live-betting"><a class="module-disabled" href="/ext/ext-live-betting">Live Betting</a></li>  -->
+					<li id="link-racing"><a class="module-enabled" href="/ext/racing">Racing</a></li>
+					<li id="link-live-casino"><a class="module-disabled" href="/ext/live-casino-page">Live Casino</a></li>
+					<li id="link-new-casino"><a class="module-disabled" href="/ext/new-casino">Casino<sup>New</sup></a></li>
+					<li id="link-casino"><a class="module-disabled" href="/ext/casino">Casino</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!--  /header  -->
+
+	<!--  main  -->
+	<div class="main">
+		
+	<div class="wrapper">
+		<div class="main-cont" id="open-bets">
+			<div class="open-bets-bar clear">
+				<h3 class="title left">Open Bets</h3>
+			</div>
+			<div class="responsive-table">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>&nbsp;</th>
+						<th>Ticket #</th>
+						<th>Wager Type</th>
+						<th>Sport</th>
+						<th>Game Date</th>
+						<th>Description</th>
+						<th class="a-right">Risk</th>
+						<th class="a-right">Win</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="odd" >
+								<td>
+											<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+											</td>
+										<td>
+											<span class="ticket-number">#30305624</span> <span class="rot-date">11/06/2016 08:36AM</span>
+										</td>
+									<td>REVERSE ACTION (200.00 USD) (1 of 1)</td>
+									<td>NFL</td>
+									<td>11/06/2016 10:00AM</td>
+									<td>[457] TOTAL o49-105 (DALLAS COWBOYS vrs CLEVELAND BROWNS)</td>
+									<td class="a-right">
+										420</td>
+									<td class="a-right">
+										800</td>
+								</tr>
+						<tr class="odd" >
+								<td class="rowspan"></td>
+									<td class="rowspan"></td>
+									<td class="rowspan"></td>
+									<td>NFL</td>
+									<td>11/06/2016 01:05PM</td>
+									<td>[465] TOTAL o44½-105 (CAROLINA PANTHERS vrs LOS ANGELES RAMS)</td>
+									<td class="rowspan"></td>
+									<td class="rowspan"></td>
+								</tr>
+						<tr class="even" >
+								<td>
+											<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+											</td>
+										<td>
+											<span class="ticket-number">#30319649</span> <span class="rot-date">11/06/2016 11:48AM</span>
+										</td>
+									<td>STRAIGHT BET</td>
+									<td>NFL</td>
+									<td>11/06/2016 11:54AM</td>
+									<td>[2451] 2H JACKSONVILLE JAGUARS +2½+105</td>
+									<td class="a-right">
+										200</td>
+									<td class="a-right">
+										210</td>
+								</tr>
+						<tr class="odd" >
+								<td>
+											<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+											</td>
+										<td>
+											<span class="ticket-number">#30319770</span> <span class="rot-date">11/06/2016 11:48AM</span>
+										</td>
+									<td>REVERSE ACTION (200.00 USD) (1 of 1)</td>
+									<td>NFL</td>
+									<td>11/06/2016 11:54AM</td>
+									<td>[2451] 2H JACKSONVILLE JAGUARS +2½+110</td>
+									<td class="a-right">
+										420</td>
+									<td class="a-right">
+										840</td>
+								</tr>
+						<tr class="odd" >
+								<td class="rowspan"></td>
+									<td class="rowspan"></td>
+									<td class="rowspan"></td>
+									<td>NFL</td>
+									<td>11/06/2016 01:05PM</td>
+									<td>[465] TOTAL o44½-105 (CAROLINA PANTHERS vrs LOS ANGELES RAMS)</td>
+									<td class="rowspan"></td>
+									<td class="rowspan"></td>
+								</tr>
+						<tr class="even" >
+								<td>
+											<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+											</td>
+										<td>
+											<span class="ticket-number">#30320137</span> <span class="rot-date">11/06/2016 11:50AM</span>
+										</td>
+									<td>REVERSE ACTION (200.00 USD) (1 of 1)</td>
+									<td>NFL</td>
+									<td>11/06/2016 11:55AM</td>
+									<td>[2455] 2H PHILADELPHIA EAGLES -2-105</td>
+									<td class="a-right">
+										420</td>
+									<td class="a-right">
+										860</td>
+								</tr>
+						<tr class="even" >
+								<td class="rowspan"></td>
+									<td class="rowspan"></td>
+									<td class="rowspan"></td>
+									<td>NFL</td>
+									<td>11/06/2016 11:54AM</td>
+									<td>[2451] 2H JACKSONVILLE JAGUARS +2½+115</td>
+									<td class="rowspan"></td>
+									<td class="rowspan"></td>
+								</tr>
+						<tr class="odd" >
+								<td>
+											<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+											</td>
+										<td>
+											<span class="ticket-number">#30320170</span> <span class="rot-date">11/06/2016 11:51AM</span>
+										</td>
+									<td>STRAIGHT BET</td>
+									<td>NFL</td>
+									<td>11/06/2016 11:55AM</td>
+									<td>[2455] 2H PHILADELPHIA EAGLES -2-105</td>
+									<td class="a-right">
+										210</td>
+									<td class="a-right">
+										200</td>
+								</tr>
+						<tr class="even" >
+								<td>
+											<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+											</td>
+										<td>
+											<span class="ticket-number">#30320413</span> <span class="rot-date">11/06/2016 11:53AM</span>
+										</td>
+									<td>REVERSE ACTION (150.00 USD) (1 of 1)</td>
+									<td>NFL</td>
+									<td>11/06/2016 11:55AM</td>
+									<td>[2455] 2H PHILADELPHIA EAGLES -1½-120</td>
+									<td class="a-right">
+										360</td>
+									<td class="a-right">
+										615</td>
+								</tr>
+						<tr class="even" >
+								<td class="rowspan"></td>
+									<td class="rowspan"></td>
+									<td class="rowspan"></td>
+									<td>NFL</td>
+									<td>11/06/2016 11:55AM</td>
+									<td>[2456] TOTAL u23+105 (2H PHILADELPHIA EAGLES vrs 2H NEW YORK GIANTS)</td>
+									<td class="rowspan"></td>
+									<td class="rowspan"></td>
+								</tr>
+						<tr class="odd" >
+								<td>
+											<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+											</td>
+										<td>
+											<span class="ticket-number">#30321065</span> <span class="rot-date">11/06/2016 12:16PM</span>
+										</td>
+									<td>STRAIGHT BET</td>
+									<td>NBA</td>
+									<td>11/06/2016 12:35PM</td>
+									<td>[1503] TOTAL o103-105 (1H PORTLAND TRAIL BLAZERS vrs 1H MEMPHIS GRIZZLIES)</td>
+									<td class="a-right">
+										210</td>
+									<td class="a-right">
+										200</td>
+								</tr>
+						<tr class="even" >
+								<td>
+											<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+											</td>
+										<td>
+											<span class="ticket-number">#30321240</span> <span class="rot-date">11/06/2016 12:21PM</span>
+										</td>
+									<td>REVERSE ACTION (200.00 USD) (1 of 1)</td>
+									<td>NBA</td>
+									<td>11/06/2016 12:35PM</td>
+									<td>[1503] TOTAL o103-105 (1H PORTLAND TRAIL BLAZERS vrs 1H MEMPHIS GRIZZLIES)</td>
+									<td class="a-right">
+										432</td>
+									<td class="a-right">
+										800</td>
+								</tr>
+						<tr class="even" >
+								<td class="rowspan"></td>
+									<td class="rowspan"></td>
+									<td class="rowspan"></td>
+									<td>NBA</td>
+									<td>11/06/2016 03:05PM</td>
+									<td>[1506] 1H TORONTO RAPTORS -5½-108</td>
+									<td class="rowspan"></td>
+									<td class="rowspan"></td>
+								</tr>
+						<tr class="odd" >
+								<td>
+											<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+											</td>
+										<td>
+											<span class="ticket-number">#30322070</span> <span class="rot-date">11/06/2016 12:39PM</span>
+										</td>
+									<td>STRAIGHT BET</td>
+									<td>NFL</td>
+									<td>11/06/2016 01:05PM</td>
+									<td>[465] TOTAL o44½-105 (CAROLINA PANTHERS vrs LOS ANGELES RAMS)</td>
+									<td class="a-right">
+										210</td>
+									<td class="a-right">
+										200</td>
+								</tr>
+						<tr class="even" >
+								<td>
+											<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+											</td>
+										<td>
+											<span class="ticket-number">#30322160</span> <span class="rot-date">11/06/2016 12:40PM</span>
+										</td>
+									<td>STRAIGHT BET</td>
+									<td>NFL</td>
+									<td>11/06/2016 01:05PM</td>
+									<td>[465] CAROLINA PANTHERS -3-105</td>
+									<td class="a-right">
+										210</td>
+									<td class="a-right">
+										200</td>
+								</tr>
+						<tr class="odd" >
+								<td>
+											<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+											</td>
+										<td>
+											<span class="ticket-number">#30322201</span> <span class="rot-date">11/06/2016 12:41PM</span>
+										</td>
+									<td>REVERSE ACTION (200.00 USD) (1 of 1)</td>
+									<td>NFL</td>
+									<td>11/06/2016 01:05PM</td>
+									<td>[463] NEW ORLEANS SAINTS -5-110</td>
+									<td class="a-right">
+										440</td>
+									<td class="a-right">
+										800</td>
+								</tr>
+						<tr class="odd" >
+								<td class="rowspan"></td>
+									<td class="rowspan"></td>
+									<td class="rowspan"></td>
+									<td>NFL</td>
+									<td>11/06/2016 01:05PM</td>
+									<td>[465] CAROLINA PANTHERS -3-105</td>
+									<td class="rowspan"></td>
+									<td class="rowspan"></td>
+								</tr>
+						<tr class="even" >
+								<td>
+											<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+											</td>
+										<td>
+											<span class="ticket-number">#30323318</span> <span class="rot-date">11/06/2016 12:52PM</span>
+										</td>
+									<td>STRAIGHT BET</td>
+									<td>NFL</td>
+									<td>11/06/2016 01:25PM</td>
+									<td>[469] TOTAL o47½-105 (TENNESSEE TITANS vrs SAN DIEGO CHARGERS)</td>
+									<td class="a-right">
+										210</td>
+									<td class="a-right">
+										200</td>
+								</tr>
+						<tr class="odd" >
+								<td>
+											<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+											</td>
+										<td>
+											<span class="ticket-number">#30323319</span> <span class="rot-date">11/06/2016 12:52PM</span>
+										</td>
+									<td>STRAIGHT BET</td>
+									<td>NFL</td>
+									<td>11/06/2016 01:25PM</td>
+									<td>[1469] TOTAL o23½-115 (1H TENNESSEE TITANS vrs 1H SAN DIEGO CHARGERS)</td>
+									<td class="a-right">
+										230</td>
+									<td class="a-right">
+										200</td>
+								</tr>
+						<tr class="even" >
+								<td>
+											<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+											</td>
+										<td>
+											<span class="ticket-number">#30323420</span> <span class="rot-date">11/06/2016 12:53PM</span>
+										</td>
+									<td>REVERSE ACTION (200.00 USD) (1 of 1)</td>
+									<td>NFL</td>
+									<td>11/06/2016 01:25PM</td>
+									<td>[1469] TOTAL o23½-115 (1H TENNESSEE TITANS vrs 1H SAN DIEGO CHARGERS)</td>
+									<td class="a-right">
+										464</td>
+									<td class="a-right">
+										800</td>
+								</tr>
+						<tr class="even" >
+								<td class="rowspan"></td>
+									<td class="rowspan"></td>
+									<td class="rowspan"></td>
+									<td>NFL</td>
+									<td>11/06/2016 01:25PM</td>
+									<td>[1469] 1H TENNESSEE TITANS +3-116</td>
+									<td class="rowspan"></td>
+									<td class="rowspan"></td>
+								</tr>
+						<tr class="odd" >
+								<td>
+											<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+											</td>
+										<td>
+											<span class="ticket-number">#30323586</span> <span class="rot-date">11/06/2016 12:55PM</span>
+										</td>
+									<td>REVERSE ACTION (200.00 USD) (1 of 1)</td>
+									<td>NFL</td>
+									<td>11/06/2016 01:25PM</td>
+									<td>[469] TOTAL o47½-105 (TENNESSEE TITANS vrs SAN DIEGO CHARGERS)</td>
+									<td class="a-right">
+										420</td>
+									<td class="a-right">
+										800</td>
+								</tr>
+						<tr class="odd" >
+								<td class="rowspan"></td>
+									<td class="rowspan"></td>
+									<td class="rowspan"></td>
+									<td>NFL</td>
+									<td>11/06/2016 01:25PM</td>
+									<td>[469] TENNESSEE TITANS +3½EV</td>
+									<td class="rowspan"></td>
+									<td class="rowspan"></td>
+								</tr>
+						<tr class="even" >
+								<td>
+											<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+											</td>
+										<td>
+											<span class="ticket-number">#30323999</span> <span class="rot-date">11/06/2016 12:57PM</span>
+										</td>
+									<td>STRAIGHT BET</td>
+									<td>NFL</td>
+									<td>11/06/2016 01:05PM</td>
+									<td>[1463] 1H NEW ORLEANS SAINTS -3-110</td>
+									<td class="a-right">
+										220</td>
+									<td class="a-right">
+										200</td>
+								</tr>
+						<tr class="odd" >
+								<td>
+											<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+											</td>
+										<td>
+											<span class="ticket-number">#30324140</span> <span class="rot-date">11/06/2016 12:58PM</span>
+										</td>
+									<td>REVERSE ACTION (200.00 USD) (1 of 1)</td>
+									<td>NFL</td>
+									<td>11/06/2016 01:05PM</td>
+									<td>[1463] 1H NEW ORLEANS SAINTS -3-110</td>
+									<td class="a-right">
+										440</td>
+									<td class="a-right">
+										800</td>
+								</tr>
+						<tr class="odd" >
+								<td class="rowspan"></td>
+									<td class="rowspan"></td>
+									<td class="rowspan"></td>
+									<td>NFL</td>
+									<td>11/06/2016 01:05PM</td>
+									<td>[1464] TOTAL u26½-102 (1H NEW ORLEANS SAINTS vrs 1H SAN FRANCISCO 49ERS)</td>
+									<td class="rowspan"></td>
+									<td class="rowspan"></td>
+								</tr>
+						</tbody>
+			</table>
+			</div>
+		</div>
+	</div>
+</div>
+	<!--  /main  -->
+
+	<!--  footer  -->
+	<div class="footer">
+		<div class="wrapper">
+			<p class="copyright">topset9.com - Sports, Live Betting, Casino, Live Dealer, Horses&nbsp;&copy;&nbsp;2016</p>
+		</div>
+	</div>
+	<!--  /footer  -->
+	<!-- embbed -->
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	
+	  ga('create', 'UA-83884552-1', 'auto');
+	  ga('set', 'userId', '8TB806');
+	  ga('send', 'pageview');
+	  
+	  </script>
+</body>
+</html>
